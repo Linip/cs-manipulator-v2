@@ -114,4 +114,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Program_EnsureOnlyOneApplicationInstanceIsRunning_MessageBoxText" xml:space="preserve">
+    <value>Внимание!
+В системе запущен другой экземпляр программы, только один экземпляр может быть запущен.</value>
+  </data>
 </root>

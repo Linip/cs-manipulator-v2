@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Manipulator.Properties;
+using Manipulator.View;
 
 namespace Manipulator
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -14,9 +17,48 @@ namespace Manipulator
         [STAThread]
         static void Main()
         {
+            EnsureOnlyOneApplicationInstanceIsRunning();
+            
+            try
+            {
+                PerformPayload();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                Mutex.ReleaseMutex();
+            }
+        }
+
+        private static readonly Mutex Mutex = new Mutex(false, "Manupulator Control App");
+
+        private static void EnsureOnlyOneApplicationInstanceIsRunning()
+        {
+            if (Mutex.WaitOne(TimeSpan.FromSeconds(5), false))
+            {
+                return;
+            }
+            
+            MessageBox.Show(
+                Resources.Program_EnsureOnlyOneApplicationInstanceIsRunning_MessageBoxText);
+                
+            Environment.Exit(0);
+        }
+
+        private static void PerformPayload()
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var view = new MainForm();
+
+            var presenter = new Presenter.MainPresenter(view);
+            
+            Application.Run(view);
         }
     }
 }

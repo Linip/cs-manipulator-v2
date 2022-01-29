@@ -54,9 +54,16 @@
         </Compile>
         <Compile Include="Infrastructure\CsvSateRepository.cs" />
         <Compile Include="Model\IStateRepository.cs" />
+        <Compile Include="Model\SystemState.cs" />
         <Compile Include="Presenter\MainPresenter.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Regulator\IRegulator.cs" />
+        <Compile Include="Regulator\PID\Regulator.cs" />
+        <Compile Include="Simulation\IModel.cs" />
+        <Compile Include="Simulation\Model\ControlElementSpecification.cs" />
+        <Compile Include="Simulation\Model\Manipulator.cs" />
+        <Compile Include="Simulation\Model\MotorSpecification.cs" />
         <Compile Include="View\IMainView.cs" />
         <Compile Include="View\MainForm.cs">
           <SubType>Form</SubType>
@@ -73,6 +80,9 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
+        <EmbeddedResource Include="View\MainForm.resx">
+          <DependentUpon>MainForm.cs</DependentUpon>
+        </EmbeddedResource>
         <None Include="Properties\Settings.settings">
             <Generator>SettingsSingleFileGenerator</Generator>
             <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -85,9 +95,6 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Simulation" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
