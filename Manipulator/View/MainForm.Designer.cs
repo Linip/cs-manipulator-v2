@@ -31,11 +31,35 @@ namespace Manipulator.View
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.runSimulation = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // runSimulation
+            // 
+            this.runSimulation.BackColor = System.Drawing.Color.LimeGreen;
+            this.runSimulation.Location = new System.Drawing.Point(222, 368);
+            this.runSimulation.Name = "runSimulation";
+            this.runSimulation.Size = new System.Drawing.Size(153, 41);
+            this.runSimulation.TabIndex = 0;
+            this.runSimulation.Text = "Начать моделирование";
+            this.runSimulation.UseMnemonic = false;
+            this.runSimulation.UseVisualStyleBackColor = false;
+            this.runSimulation.Click += new System.EventHandler(this.runSimulation_Click);
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "MainForm";
+            this.Controls.Add(this.runSimulation);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "MainForm";
+            this.Text = "Manipulator Controll App";
+            this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button runSimulation;
 
         #endregion
     }
