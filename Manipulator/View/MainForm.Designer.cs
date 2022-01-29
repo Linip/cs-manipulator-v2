@@ -37,7 +37,7 @@ namespace Manipulator.View
             // runSimulation
             // 
             this.runSimulation.BackColor = System.Drawing.Color.LimeGreen;
-            this.runSimulation.Location = new System.Drawing.Point(222, 368);
+            this.runSimulation.Location = new System.Drawing.Point(635, 397);
             this.runSimulation.Name = "runSimulation";
             this.runSimulation.Size = new System.Drawing.Size(153, 41);
             this.runSimulation.TabIndex = 0;
@@ -59,7 +59,7 @@ namespace Manipulator.View
             this.ResumeLayout(false);
         }
 
-        private System.Windows.Forms.Button runSimulation;
+        public System.Windows.Forms.Button runSimulation;
 
         #endregion
     }

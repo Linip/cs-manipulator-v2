@@ -5,12 +5,17 @@ namespace Manipulator.Presenter
     public class MainPresenter
     {
         
-        private readonly IMainView _view;
+        private readonly MainForm _view;
 
-        public MainPresenter(IMainView view)
+        public MainPresenter(MainForm view)
         {
             _view = view;
             view.Presenter = this;
+        }
+
+        public void RunSimulation()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

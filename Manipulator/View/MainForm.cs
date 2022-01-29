@@ -21,7 +21,7 @@ namespace Manipulator.View
 
         private void runSimulation_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            _presenter.RunSimulation();
         }
     }
 }
