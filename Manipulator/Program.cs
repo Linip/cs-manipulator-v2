@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -51,6 +52,8 @@ namespace Manipulator
             Environment.Exit(0);
         }
 
+        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.Int32[]")]
+        [SuppressMessage("ReSharper.DPA", "DPA0001: Memory allocation issues")]
         private static void PerformPayload()
         {
             Application.EnableVisualStyles();

@@ -17,10 +17,10 @@ namespace Manipulator.Presenter
         
         public void DrawChart(double[] data)
         {
-            XYChart c = new XYChart(740, 440);
+            XYChart c = new XYChart(730, 440);
 
             // Set the plotarea at (30, 20) and of size 200 x 200 pixels
-            c.setPlotArea(30, 20, 690, 400);
+            c.setPlotArea(40, 20, 690, 400);
 
             // Add a bar chart layer using the given data
             LineLayer lineLayer = c.addLineLayer(data);
@@ -32,7 +32,8 @@ namespace Manipulator.Presenter
             _chartViewer.Chart = c;
              // data[data.Length] = 45;
 
-             c.addLineLayer2();            
+            // var layer = c.addLineLayer2();
+            // layer.addDataSet();
             
             // chartViewer.Update();
             //include tool tip for the chart

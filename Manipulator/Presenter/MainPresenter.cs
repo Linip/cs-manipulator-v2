@@ -9,17 +9,13 @@ namespace Manipulator.Presenter
 {
     public class MainPresenter
     {
-        const double TimeStep = 0.01;
-        
         private readonly MainForm _view;
         public readonly ChartPresenter ChartPresenter;
         private DataSeries _dataSeries;
 
-        private bool _stopSimulation = false;
-
         private readonly NumberFormatInfo _numberFormatInfo = new NumberFormatInfo
         {
-            NumberDecimalSeparator = "."
+            NumberDecimalSeparator = ","
         };
 
         public MainPresenter(MainForm view)
@@ -37,39 +33,32 @@ namespace Manipulator.Presenter
             _view.updateChart.Start();
             
             
+            var motorSpecification = new MotorSpecification
+            {
+                InstantaneousFactor =  ToDouble(_view.instantaneousFactorTextBox.Text),
+                WindingInductance = ToDouble(_view.windingInductanceTextBox.Text),
+                WindingResistance = ToDouble(_view.windingResistanceTextBox.Text),
+                SpeedRatio = ToDouble(_view.speedRatioTextBox.Text)
+            };
             
+            var controlElementSpecification = new ControlElementSpecification
+            {
+                InertiaMoment = ToDouble(_view.inertiaMomentTextBox.Text),
+                FrictionCoefficient = ToDouble(_view.frictionCoefficientTextBox.Text),
+                SpringConstant = ToDouble(_view.springConstantTextBox.Text)
+            };
             
-            // var motorSpecification = new MotorSpecification
-            // {
-            //     InstantaneousFactor =  ToDouble(_view.instantaneousFactorTextBox.Text),
-            //     WindingInductance = ToDouble(_view.windingInductanceTextBox.Text),
-            //     WindingResistance = ToDouble(_view.windingResistanceTextBox.Text),
-            //     SpeedRatio = ToDouble(_view.speedRatioTextBox.Text)
-            // };
-            //
-            // var controlElementSpecification = new ControlElementSpecification
-            // {
-            //     InertiaMoment = ToDouble(_view.inertiaMomentTextBox.Text),
-            //     FrictionCoefficient = ToDouble(_view.frictionCoefficientTextBox.Text),
-            //     SpringConstant = ToDouble(_view.springConstantTextBox.Text)
-            // };
-            //
-            // var samplingTime = ToDouble(_view.samplingTimeTextBox.Text);
-            // var controlSignal = ToDouble(_view.controlSignalTextBox.Text);
-            //
-            // var manipulator = new Simulation.Model.Manipulator(motorSpecification, controlElementSpecification);
-            //
-            // _dataSeries = new DataSeries((int) (samplingTime / TimeStep));
-            // var simulator =  new Simulator(manipulator, samplingTime, controlSignal, TimeStep, _dataSeries);
+            var simulationTime = ToDouble(_view.simulationTimeTextBox.Text);
+            var controlSignal = ToDouble(_view.controlSignalTextBox.Text);
+            var simulationStep = ToDouble(_view.simulationStep.Text);
+            
+            var manipulator = new Simulation.Model.Manipulator(motorSpecification, controlElementSpecification);
+            
+            var simulator =  new Simulator(manipulator, simulationTime, controlSignal, simulationStep, _dataSeries);
 
-            // var chartThread = new Thread(ChartThread);
-            // chartThread.Start();
-            // chartThread.Join();
-            
-            // ChartThread();
 
-            // var thread = new Thread(simulator.Run);
-            // thread.Start();
+            var thread = new Thread(simulator.Run);
+            thread.Start();
             // thread.Join();
         }
 
@@ -78,22 +67,9 @@ namespace Manipulator.Presenter
             return Convert.ToDouble(value, _numberFormatInfo);
         }
 
-        private void ChartThread()
-        {
-            while (!_stopSimulation)
-            {
-                lock (_dataSeries)
-                {
-                    ChartPresenter.DrawChart( _dataSeries.ToArray());
-                }
-                // Thread.Sleep(20);
-            }
-        }
-
         public void StopSimulation()
         {
             _view.updateChart.Stop();
-            _stopSimulation = true;
         }
 
         public void RenderChart()

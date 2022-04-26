@@ -57,12 +57,6 @@ namespace Manipulator.View
             var row1 = new[] {"Индуктивность обмотки якоря двигателя", "6"};
             var row2 = new[] {"Активное сопротивление обмотки якоря двигателя", "1"};
             var row3 = new[] {"Скоростной коэффициент двигателя", "7"};
-
-            //
-            // motorSpecificationGridView.Rows.Add(row);
-            // motorSpecificationGridView.Rows.Add(row1);
-            // motorSpecificationGridView.Rows.Add(row2);
-            // motorSpecificationGridView.Rows.Add(row3);
         }
 
         private void stopSimulationButton_Click(object sender, EventArgs e)
@@ -73,6 +67,23 @@ namespace Manipulator.View
         private void updateChart_Tick(object sender, EventArgs e)
         {
             _presenter.RenderChart();
+        }
+
+        private void setDefaultConfig_Click(object sender, EventArgs e)
+        {
+            windingInductanceTextBox.Text = Convert.ToString(Math.Pow(10, -2));
+            windingResistanceTextBox.Text = Convert.ToString(13.8);
+            speedRatioTextBox.Text = Convert.ToString(20);
+
+            inertiaMomentTextBox.Text = Convert.ToString(0.08);
+            frictionCoefficientTextBox.Text =  Convert.ToString(0.0023);
+            instantaneousFactorTextBox.Text = Convert.ToString(49 * Math.Pow(10, -3));
+            springConstantTextBox.Text = Convert.ToString(0.1);
+            
+            simulationTimeTextBox.Text = "20";
+            simulationStep.Text = "0,001";
+            controlSignalTextBox.Text = "1";
+
         }
     }
 }
