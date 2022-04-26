@@ -43,6 +43,8 @@ namespace Manipulator
                 return;
             }
             
+            Mutex.ReleaseMutex();
+            
             MessageBox.Show(
                 Resources.Program_EnsureOnlyOneApplicationInstanceIsRunning_MessageBoxText);
                 
@@ -60,5 +62,6 @@ namespace Manipulator
             
             Application.Run(view);
         }
+      
     }
 }

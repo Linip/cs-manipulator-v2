@@ -8,16 +8,13 @@ namespace Manipulator.Simulation.Model
         public readonly ControlElementSpecification Element;
         
         private SystemState _previousState;
-        private readonly double _samplingTime;
         private Regulator.IRegulator _regulator;
         
 
-        public Manipulator(MotorSpecification motor, ControlElementSpecification element, double samplingTime)
+        public Manipulator(MotorSpecification motor, ControlElementSpecification element)
         {
             Motor = motor;
             Element = element;
-
-            _samplingTime = samplingTime;
 
             _previousState = new SystemState
             {
@@ -28,17 +25,31 @@ namespace Manipulator.Simulation.Model
             };
         }
         
-        public SystemState NextState(double controlSignal)
+        public SystemState NextState(double controlSignal, double timeStep)
         {
             var state = new SystemState();
 
             state.ControlSignal = controlSignal;
 
-            var tunedSignal = _regulator.Tune(state.ControlSignal);
+            // var tunedSignal = _regulator.Tune(state.ControlSignal);
             
+            state.CurrentStrength =
+                _previousState.CurrentStrength
+                - timeStep / Motor.WindingInductance * Motor.WindingResistance * _previousState.CurrentStrength
+                - timeStep / Motor.WindingInductance / Motor.SpeedRatio * _previousState.AngularVelocity
+                + timeStep / Motor.WindingInductance * state.ControlSignal;
+
+            state.AngularVelocity =
+                _previousState.AngularVelocity
+                - timeStep / Element.InertiaMoment * Element.FrictionCoefficient * _previousState.AngularVelocity
+                - timeStep / Element.InertiaMoment * Element.SpringConstant * _previousState.Angle
+                + timeStep / Element.InertiaMoment * Motor.InstantaneousFactor * state.CurrentStrength;
+
+            state.Angle = _previousState.Angle + timeStep * _previousState.AngularVelocity;
+
+            _previousState = state;
             
-            
-            throw new System.NotImplementedException();
+            return state;
         }
     }
 }

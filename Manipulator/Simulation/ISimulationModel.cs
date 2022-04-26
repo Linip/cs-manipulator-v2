@@ -4,6 +4,6 @@ namespace Manipulator.Simulation
 {
     public interface ISimulationModel
     {
-        SystemState NextState(double controlSignal);
+        SystemState NextState(double controlSignal, double timeStep);
     }
 }

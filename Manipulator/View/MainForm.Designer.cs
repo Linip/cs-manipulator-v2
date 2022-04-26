@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using ChartDirector;
 
 namespace Manipulator.View
 {
@@ -31,6 +32,7 @@ namespace Manipulator.View
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.runSimulation = new System.Windows.Forms.Button();
             this.motorSpecificationBox = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,14 +50,22 @@ namespace Manipulator.View
             this.frictionCoefficientTextBox = new System.Windows.Forms.TextBox();
             this.inertiaMomentTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.samplingTimeTextBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.controlSignalTextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.stopSimulationButton = new System.Windows.Forms.Button();
+            this.winChartViewer = new ChartDirector.WinChartViewer();
+            this.updateChart = new System.Windows.Forms.Timer(this.components);
             this.motorSpecificationBox.SuspendLayout();
             this.controlElementSecificationBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.winChartViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // runSimulation
             // 
             this.runSimulation.BackColor = System.Drawing.Color.LimeGreen;
-            this.runSimulation.Location = new System.Drawing.Point(635, 397);
+            this.runSimulation.Location = new System.Drawing.Point(102, 412);
             this.runSimulation.Name = "runSimulation";
             this.runSimulation.Size = new System.Drawing.Size(153, 41);
             this.runSimulation.TabIndex = 0;
@@ -85,9 +95,9 @@ namespace Manipulator.View
             // 
             this.label4.Location = new System.Drawing.Point(6, 91);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(219, 16);
+            this.label4.Size = new System.Drawing.Size(297, 16);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Скоростной коэффициент двигателя";
+            this.label4.Text = "Скоростной коэффициент двигателя, Ke";
             // 
             // label3
             // 
@@ -95,7 +105,7 @@ namespace Manipulator.View
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(303, 16);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Активное сопротивление обмотки якоря двигателя";
+            this.label3.Text = "Активное сопротивление обмотки якоря двигателя, R";
             // 
             // speedRatioTextBox
             // 
@@ -122,9 +132,9 @@ namespace Manipulator.View
             // 
             this.label2.Location = new System.Drawing.Point(6, 43);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(219, 16);
+            this.label2.Size = new System.Drawing.Size(297, 16);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Индуктивность обмотки якоря двигателя";
+            this.label2.Text = "Индуктивность обмотки якоря двигателя, L";
             // 
             // instantaneousFactorTextBox
             // 
@@ -137,9 +147,9 @@ namespace Manipulator.View
             // 
             this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(219, 16);
+            this.label1.Size = new System.Drawing.Size(303, 16);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Моментальный коэффициент двигателя";
+            this.label1.Text = "Моментальный коэффициент двигателя, Kt";
             // 
             // controlElementSecificationBox
             // 
@@ -162,7 +172,7 @@ namespace Manipulator.View
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(303, 16);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Коэффициент жёсткости пружины\r\n";
+            this.label7.Text = "Коэффициент жёсткости пружины, K";
             // 
             // label6
             // 
@@ -170,8 +180,7 @@ namespace Manipulator.View
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(303, 16);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Коэффициент вязкого трения в подшипниках\r\n";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
+            this.label6.Text = "Коэффициент вязкого трения в подшипниках, C";
             // 
             // springConstantTextBox
             // 
@@ -200,14 +209,74 @@ namespace Manipulator.View
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(303, 16);
             this.label5.TabIndex = 1;
-            this.label5.Text = "Момент инерции звена";
+            this.label5.Text = "Момент инерции звена, J";
+            // 
+            // samplingTimeTextBox
+            // 
+            this.samplingTimeTextBox.Location = new System.Drawing.Point(327, 244);
+            this.samplingTimeTextBox.Name = "samplingTimeTextBox";
+            this.samplingTimeTextBox.Size = new System.Drawing.Size(105, 20);
+            this.samplingTimeTextBox.TabIndex = 5;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(12, 247);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(303, 16);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Шаг моделирования, t [c]";
+            // 
+            // controlSignalTextBox
+            // 
+            this.controlSignalTextBox.Location = new System.Drawing.Point(327, 270);
+            this.controlSignalTextBox.Name = "controlSignalTextBox";
+            this.controlSignalTextBox.Size = new System.Drawing.Size(105, 20);
+            this.controlSignalTextBox.TabIndex = 8;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(12, 274);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(303, 16);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Управляющий сигнал";
+            // 
+            // stopSimulationButton
+            // 
+            this.stopSimulationButton.BackColor = System.Drawing.Color.Red;
+            this.stopSimulationButton.Location = new System.Drawing.Point(279, 412);
+            this.stopSimulationButton.Name = "stopSimulationButton";
+            this.stopSimulationButton.Size = new System.Drawing.Size(153, 41);
+            this.stopSimulationButton.TabIndex = 10;
+            this.stopSimulationButton.Text = "Остановить моделирование";
+            this.stopSimulationButton.UseMnemonic = false;
+            this.stopSimulationButton.UseVisualStyleBackColor = false;
+            this.stopSimulationButton.Click += new System.EventHandler(this.stopSimulationButton_Click);
+            // 
+            // winChartViewer
+            // 
+            this.winChartViewer.Location = new System.Drawing.Point(483, 12);
+            this.winChartViewer.Name = "winChartViewer";
+            this.winChartViewer.Size = new System.Drawing.Size(740, 440);
+            this.winChartViewer.TabIndex = 11;
+            this.winChartViewer.TabStop = false;
+            // 
+            // updateChart
+            // 
+            this.updateChart.Tick += new System.EventHandler(this.updateChart_Tick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1280, 479);
+            this.Controls.Add(this.winChartViewer);
+            this.Controls.Add(this.stopSimulationButton);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.controlSignalTextBox);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.samplingTimeTextBox);
             this.Controls.Add(this.controlElementSecificationBox);
             this.Controls.Add(this.motorSpecificationBox);
             this.Controls.Add(this.runSimulation);
@@ -219,29 +288,45 @@ namespace Manipulator.View
             this.motorSpecificationBox.PerformLayout();
             this.controlElementSecificationBox.ResumeLayout(false);
             this.controlElementSecificationBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.winChartViewer)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
-        private System.Windows.Forms.GroupBox controlElementSecificationBox;
+        public System.Windows.Forms.Timer updateChart;
+
+        private ChartDirector.WinChartViewer winChartViewer;
+
+        public System.Windows.Forms.Button stopSimulationButton;
+
+        public System.Windows.Forms.TextBox controlSignalTextBox;
+        private System.Windows.Forms.Label label9;
+
+        public System.Windows.Forms.TextBox samplingTimeTextBox;
+        private System.Windows.Forms.Label label8;
+
+        public System.Windows.Forms.GroupBox controlElementSecificationBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox inertiaMomentTextBox;
-        private System.Windows.Forms.TextBox frictionCoefficientTextBox;
-        private System.Windows.Forms.TextBox springConstantTextBox;
+        public System.Windows.Forms.TextBox inertiaMomentTextBox;
+        public System.Windows.Forms.TextBox frictionCoefficientTextBox;
+        public System.Windows.Forms.TextBox springConstantTextBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox windingInductanceTextBox;
-        private System.Windows.Forms.TextBox windingResistanceTextBox;
-        private System.Windows.Forms.TextBox speedRatioTextBox;
+        public System.Windows.Forms.TextBox windingInductanceTextBox;
+        public System.Windows.Forms.TextBox windingResistanceTextBox;
+        public System.Windows.Forms.TextBox speedRatioTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
 
         private System.Windows.Forms.GroupBox motorSpecificationBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox instantaneousFactorTextBox;
+        public System.Windows.Forms.TextBox instantaneousFactorTextBox;
 
         public System.Windows.Forms.Button runSimulation;
+
+        public WinChartViewer ChartViewer;
 
         #endregion
     }
