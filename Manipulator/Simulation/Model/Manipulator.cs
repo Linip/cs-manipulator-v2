@@ -12,7 +12,6 @@ namespace Manipulator.Simulation.Model
         private SystemState _previousState;
         public IRegulator Regulator;
         
-
         public Manipulator(MotorSpecification motor, ControlElementSpecification element, IRegulator regulator)
         {
             Motor = motor;
@@ -28,6 +27,7 @@ namespace Manipulator.Simulation.Model
             };
         }
         
+        [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH")]
         public SystemState NextState(double controlSignal, double timeStep)
         {
             var state = new SystemState
@@ -53,7 +53,7 @@ namespace Manipulator.Simulation.Model
 
             _previousState = state;
             
-            return state;
+            return _previousState;
         }
     }
 }

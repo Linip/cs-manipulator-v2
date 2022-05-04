@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using Manipulator.Presenter;
 using Manipulator.Simulation;
 
 namespace Manipulator.Contexts.Simulator
@@ -9,18 +10,20 @@ namespace Manipulator.Contexts.Simulator
         private readonly double _controlSignal;
         private readonly ISimulationModel _model;
         private readonly DataSeries _dataSeries;
+        private readonly DataPresenter _dataPresenter;
 
         private readonly double _step;
 
         private double _sumTime = 0;
         
-        public Simulator(ISimulationModel model, double simulationTime, double controlSignal, double timeStep, DataSeries dataSeries)
+        public Simulator(ISimulationModel model, double simulationTime, double controlSignal, double timeStep, DataSeries dataSeries, DataPresenter dataPresenter)
         {
             _model = model;
             _simulationTime = simulationTime;
             _controlSignal = controlSignal;
             _step = timeStep;
             _dataSeries = dataSeries;
+            _dataPresenter = dataPresenter;
         }
         
         public void Run()
@@ -30,14 +33,13 @@ namespace Manipulator.Contexts.Simulator
                 var state = _model.NextState(_controlSignal, _step);
                
                 
-                lock (_dataSeries)
+                lock (_dataPresenter)
                 {
-                    _dataSeries.Add(state.Angle);
+                    _dataPresenter.Add(state);
                 }
 
                 _sumTime += _step;
                 
-                // Thread.Sleep(1);
             }
 
             var t = 3;

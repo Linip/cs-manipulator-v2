@@ -12,6 +12,7 @@ namespace Manipulator.Presenter
     {
         private readonly MainForm _view;
         public readonly ChartPresenter ChartPresenter;
+        public readonly DataPresenter DataPresenter;
         private DataSeries _dataSeries;
 
         private readonly NumberFormatInfo _numberFormatInfo = new NumberFormatInfo
@@ -24,52 +25,73 @@ namespace Manipulator.Presenter
             _view = view;
             view.Presenter = this;
             ChartPresenter = new ChartPresenter();
+            DataPresenter = new DataPresenter(ChartPresenter.ChartWidth);
         }
 
         public void RunSimulation()
         {
+            _dataSeries = new DataSeries();
             
-            _dataSeries = new DataSeries(5);
-
             _view.updateChart.Start();
             
+            var motorSpecification = GetMotorSpecification();
+            var controlElementSpecification = GetControlElementSpecification();
+            var regulatorSpecification = GetRegulatorSpecification();
             
-            var motorSpecification = new MotorSpecification
-            {
-                InstantaneousFactor =  ToDouble(_view.instantaneousFactorTextBox.Text),
-                WindingInductance = ToDouble(_view.windingInductanceTextBox.Text),
-                WindingResistance = ToDouble(_view.windingResistanceTextBox.Text),
-                SpeedRatio = ToDouble(_view.speedRatioTextBox.Text)
-            };
-            
-            var controlElementSpecification = new ControlElementSpecification
-            {
-                InertiaMoment = ToDouble(_view.inertiaMomentTextBox.Text),
-                FrictionCoefficient = ToDouble(_view.frictionCoefficientTextBox.Text),
-                SpringConstant = ToDouble(_view.springConstantTextBox.Text)
-            };
+            var simulationTime = ToDouble(_view.simulationTimeTextBox.Text);
+            var controlSignal = ToDouble(_view.controlSignalTextBox.Text);
+            var simulationStep = ToDouble(_view.simulationStep.Text);
 
+            var simulationStepsAmount = Convert.ToInt32(simulationTime / simulationStep);
+            DataPresenter.ValuesAmount = simulationStepsAmount;
+            DataPresenter.InitDataSeries();
+            var saveAfter = DataPresenter.CalculateSaveAfter();
+            
+            ChartPresenter.SolveLabels(saveAfter * simulationStep);
+            
+            var regulator = new PidRegulator(regulatorSpecification);
+            
+            var manipulator = new Simulation.Model.Manipulator(motorSpecification, controlElementSpecification, regulator);
+            
+            var simulator =  new Simulator(manipulator, simulationTime, controlSignal, simulationStep, _dataSeries, DataPresenter);
+
+            
+            var thread = new Thread(simulator.Run);
+            thread.Start();
+        }
+
+        private PidSpecification GetRegulatorSpecification()
+        {
             var regulatorSpecification = new PidSpecification
             {
                 Proportional = ToDouble(_view.regulatorPoporcialTeaxtBox.Text),
                 Integrating = ToDouble(_view.regulatorIntegralTextBox.Text),
                 Differentiating = ToDouble(_view.regulatorDifferentialTextBox.Text),
             };
-            
-            var simulationTime = ToDouble(_view.simulationTimeTextBox.Text);
-            var controlSignal = ToDouble(_view.controlSignalTextBox.Text);
-            var simulationStep = ToDouble(_view.simulationStep.Text);
+            return regulatorSpecification;
+        }
 
-            var regulator = new PidRegulator(regulatorSpecification);
-            
-            var manipulator = new Simulation.Model.Manipulator(motorSpecification, controlElementSpecification, regulator);
-            
-            var simulator =  new Simulator(manipulator, simulationTime, controlSignal, simulationStep, _dataSeries);
+        private ControlElementSpecification GetControlElementSpecification()
+        {
+            var controlElementSpecification = new ControlElementSpecification
+            {
+                InertiaMoment = ToDouble(_view.inertiaMomentTextBox.Text),
+                FrictionCoefficient = ToDouble(_view.frictionCoefficientTextBox.Text),
+                SpringConstant = ToDouble(_view.springConstantTextBox.Text)
+            };
+            return controlElementSpecification;
+        }
 
-
-            var thread = new Thread(simulator.Run);
-            thread.Start();
-            // thread.Join();
+        private MotorSpecification GetMotorSpecification()
+        {
+            var motorSpecification = new MotorSpecification
+            {
+                InstantaneousFactor = ToDouble(_view.instantaneousFactorTextBox.Text),
+                WindingInductance = ToDouble(_view.windingInductanceTextBox.Text),
+                WindingResistance = ToDouble(_view.windingResistanceTextBox.Text),
+                SpeedRatio = ToDouble(_view.speedRatioTextBox.Text)
+            };
+            return motorSpecification;
         }
 
         private double ToDouble(string value)
@@ -84,9 +106,9 @@ namespace Manipulator.Presenter
 
         public void RenderChart()
         {
-            lock (_dataSeries)
+            lock (DataPresenter)
             {
-                ChartPresenter.DrawChart(_dataSeries.ToArray());
+                ChartPresenter.DrawChart(DataPresenter.DataSeries.ToArray());
             }
         }
     }

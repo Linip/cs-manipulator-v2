@@ -60,6 +60,7 @@
             <DependentUpon>Form1.cs</DependentUpon>
         </Compile>
         <Compile Include="Infrastructure\CsvSateRepository.cs" />
+        <Compile Include="Presenter\DataPresenter.cs" />
         <Compile Include="Regulator\PID\PidSpecification.cs" />
         <Compile Include="SimulationThread.cs" />
         <Compile Include="Model\IStateRepository.cs" />
@@ -109,6 +110,7 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Contexts\ControlSystem" />
+      <Folder Include="Infrastructure\DataSeries" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

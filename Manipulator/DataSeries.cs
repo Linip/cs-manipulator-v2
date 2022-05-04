@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Manipulator
 {
@@ -6,7 +7,7 @@ namespace Manipulator
     {
         private readonly List<double> _data;
 
-        public DataSeries(int sampleSize) // todo delete argument
+        public DataSeries()
         {
             _data = new List<double>();
         }

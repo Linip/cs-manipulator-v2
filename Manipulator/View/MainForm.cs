@@ -79,6 +79,10 @@ namespace Manipulator.View
             frictionCoefficientTextBox.Text =  Convert.ToString(0.0023);
             instantaneousFactorTextBox.Text = Convert.ToString(49 * Math.Pow(10, -3));
             springConstantTextBox.Text = Convert.ToString(0.1);
+
+            regulatorPoporcialTeaxtBox.Text = "1";
+            regulatorDifferentialTextBox.Text = "0";
+            regulatorIntegralTextBox.Text = "0";
             
             simulationTimeTextBox.Text = "20";
             simulationStep.Text = "0,001";
