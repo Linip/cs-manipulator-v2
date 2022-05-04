@@ -2,6 +2,6 @@
 {
     public interface IRegulator
     {
-        double Tune(double signal);
+        double Tune(double signal, double simulationStep);
     }
 }

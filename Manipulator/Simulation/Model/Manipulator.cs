@@ -1,4 +1,6 @@
-﻿using Manipulator.Model;
+﻿using System.Diagnostics.CodeAnalysis;
+using Manipulator.Model;
+using Manipulator.Regulator;
 
 namespace Manipulator.Simulation.Model
 {
@@ -8,13 +10,14 @@ namespace Manipulator.Simulation.Model
         public readonly ControlElementSpecification Element;
         
         private SystemState _previousState;
-        private Regulator.IRegulator _regulator;
+        public IRegulator Regulator;
         
 
-        public Manipulator(MotorSpecification motor, ControlElementSpecification element)
+        public Manipulator(MotorSpecification motor, ControlElementSpecification element, IRegulator regulator)
         {
             Motor = motor;
             Element = element;
+            Regulator = regulator;
 
             _previousState = new SystemState
             {
@@ -27,17 +30,18 @@ namespace Manipulator.Simulation.Model
         
         public SystemState NextState(double controlSignal, double timeStep)
         {
-            var state = new SystemState();
+            var state = new SystemState
+            {
+                ControlSignal = controlSignal
+            };
 
-            state.ControlSignal = controlSignal;
-
-            // var tunedSignal = _regulator.Tune(state.ControlSignal);
+            var tunedSignal = Regulator.Tune(state.ControlSignal - _previousState.Angle, timeStep);
             
             state.CurrentStrength =
                 _previousState.CurrentStrength
                 - timeStep / Motor.WindingInductance * Motor.WindingResistance * _previousState.CurrentStrength
                 - timeStep / Motor.WindingInductance / Motor.SpeedRatio * _previousState.AngularVelocity
-                + timeStep / Motor.WindingInductance * state.ControlSignal;
+                + timeStep / Motor.WindingInductance * tunedSignal;
 
             state.AngularVelocity =
                 _previousState.AngularVelocity

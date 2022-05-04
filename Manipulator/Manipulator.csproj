@@ -60,6 +60,7 @@
             <DependentUpon>Form1.cs</DependentUpon>
         </Compile>
         <Compile Include="Infrastructure\CsvSateRepository.cs" />
+        <Compile Include="Regulator\PID\PidSpecification.cs" />
         <Compile Include="SimulationThread.cs" />
         <Compile Include="Model\IStateRepository.cs" />
         <Compile Include="Model\SystemState.cs" />
@@ -68,7 +69,7 @@
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Regulator\IRegulator.cs" />
-        <Compile Include="Regulator\PID\Regulator.cs" />
+        <Compile Include="Regulator\PID\PidRegulator.cs" />
         <Compile Include="Simulation\ISimulationModel.cs" />
         <Compile Include="Simulation\Model\ControlElementSpecification.cs" />
         <Compile Include="Simulation\Model\Manipulator.cs" />
