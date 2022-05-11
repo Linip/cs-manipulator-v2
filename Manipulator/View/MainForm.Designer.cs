@@ -282,7 +282,7 @@ namespace Manipulator.View
             this.setDefaultConfig.Name = "setDefaultConfig";
             this.setDefaultConfig.Size = new System.Drawing.Size(150, 42);
             this.setDefaultConfig.TabIndex = 12;
-            this.setDefaultConfig.Text = "Установить дефолтные значения";
+            this.setDefaultConfig.Text = "Установить стандартные значения";
             this.setDefaultConfig.UseVisualStyleBackColor = true;
             this.setDefaultConfig.Click += new System.EventHandler(this.setDefaultConfig_Click);
             // 

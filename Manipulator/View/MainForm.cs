@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using Manipulator.Presenter;
 
@@ -18,8 +17,6 @@ namespace Manipulator.View
 
         private void MainForm_Load(Object sender, EventArgs e)
         {
-            PopulateMotorGridView();
-           
             _presenter.ChartPresenter.InitChart(winChartViewer);
         }
 
@@ -32,31 +29,6 @@ namespace Manipulator.View
         private void runSimulation_Click(object sender, EventArgs e)
         {
             _presenter.RunSimulation();
-        }
-
-        private void PopulateMotorGridView()
-        {
-            var cell = new DataGridViewTextBoxCell
-            {
-                Value = 0,
-                ReadOnly = false
-            };
-
-            var row = new DataGridViewRow();
-            row.Cells.Add(new DataGridViewTextBoxCell
-            {
-                Value = "Mоментальный коэффициент двигателя"
-            });
-            row.Cells.Add(new DataGridViewTextBoxCell
-            {
-                Value = 29,
-                ReadOnly = false
-            });
-            
-            var row0 = new IConvertible[] {"Mоментальный коэффициент двигателя", 29};
-            var row1 = new[] {"Индуктивность обмотки якоря двигателя", "6"};
-            var row2 = new[] {"Активное сопротивление обмотки якоря двигателя", "1"};
-            var row3 = new[] {"Скоростной коэффициент двигателя", "7"};
         }
 
         private void stopSimulationButton_Click(object sender, EventArgs e)

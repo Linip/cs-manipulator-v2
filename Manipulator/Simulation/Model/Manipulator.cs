@@ -8,7 +8,7 @@ namespace Manipulator.Simulation.Model
         public readonly ControlElementSpecification Element;
         
         private SystemState _previousState;
-        public IRegulator Regulator;
+        public readonly IRegulator Regulator;
         
 
         public Manipulator(MotorSpecification motor, ControlElementSpecification element, IRegulator regulator)

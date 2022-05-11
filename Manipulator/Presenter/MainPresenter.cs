@@ -13,6 +13,7 @@ namespace Manipulator.Presenter
         private readonly MainForm _view;
         public readonly ChartPresenter ChartPresenter;
         private DataSeries _dataSeries;
+        private Thread _simulationThread;
 
         private readonly NumberFormatInfo _numberFormatInfo = new NumberFormatInfo
         {
@@ -28,11 +29,9 @@ namespace Manipulator.Presenter
 
         public void RunSimulation()
         {
-            
             _dataSeries = new DataSeries(5);
 
             _view.updateChart.Start();
-            
             
             var motorSpecification = new MotorSpecification
             {
@@ -66,10 +65,8 @@ namespace Manipulator.Presenter
             
             var simulator =  new Simulator(manipulator, simulationTime, controlSignal, simulationStep, _dataSeries);
 
-
-            var thread = new Thread(simulator.Run);
-            thread.Start();
-            // thread.Join();
+            _simulationThread = new Thread(simulator.Run);
+            _simulationThread.Start();
         }
 
         private double ToDouble(string value)
@@ -79,6 +76,7 @@ namespace Manipulator.Presenter
 
         public void StopSimulation()
         {
+            _simulationThread.Abort();
             _view.updateChart.Stop();
         }
 

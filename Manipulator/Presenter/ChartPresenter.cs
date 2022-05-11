@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using ChartDirector;
+﻿using ChartDirector;
 
 namespace Manipulator.Presenter
 {

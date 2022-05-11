@@ -52,16 +52,7 @@
     <ItemGroup>
         <Compile Include="Contexts\Simulator\Simulator.cs" />
         <Compile Include="DataSeries.cs" />
-        <Compile Include="Form1.cs">
-            <SubType>Form</SubType>
-        </Compile>
-        <Compile Include="Form1.Designer.cs">
-            <DependentUpon>Form1.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Infrastructure\CsvSateRepository.cs" />
         <Compile Include="Regulator\PID\PidSpecification.cs" />
-        <Compile Include="SimulationThread.cs" />
-        <Compile Include="Model\IStateRepository.cs" />
         <Compile Include="Presenter\ChartPresenter.cs" />
         <Compile Include="Presenter\MainPresenter.cs" />
         <Compile Include="Program.cs" />
