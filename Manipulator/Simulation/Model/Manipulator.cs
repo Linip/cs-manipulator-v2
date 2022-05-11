@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Manipulator.Model;
-using Manipulator.Regulator;
+﻿using Manipulator.Regulator;
 
 namespace Manipulator.Simulation.Model
 {

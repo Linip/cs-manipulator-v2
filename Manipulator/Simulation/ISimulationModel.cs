@@ -1,4 +1,4 @@
-﻿using Manipulator.Model;
+﻿using Manipulator.Simulation.Model;
 
 namespace Manipulator.Simulation
 {

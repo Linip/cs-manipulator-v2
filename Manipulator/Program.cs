@@ -12,6 +12,8 @@ namespace Manipulator
 {
     internal static class Program
     {
+        private static readonly Mutex Mutex = new Mutex(false, "Manupulator Control App");
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -35,8 +37,6 @@ namespace Manipulator
             }
         }
 
-        private static readonly Mutex Mutex = new Mutex(false, "Manupulator Control App");
-
         private static void EnsureOnlyOneApplicationInstanceIsRunning()
         {
             if (Mutex.WaitOne(TimeSpan.FromSeconds(5), false))
@@ -52,8 +52,6 @@ namespace Manipulator
             Environment.Exit(0);
         }
 
-        [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.Int32[]")]
-        [SuppressMessage("ReSharper.DPA", "DPA0001: Memory allocation issues")]
         private static void PerformPayload()
         {
             Application.EnableVisualStyles();

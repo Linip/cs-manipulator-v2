@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Manipulator.Simulation;
+﻿using Manipulator.Simulation;
 
 namespace Manipulator.Contexts.Simulator
 {
@@ -28,7 +27,6 @@ namespace Manipulator.Contexts.Simulator
             while (_sumTime < _simulationTime)
             {
                 var state = _model.NextState(_controlSignal, _step);
-               
                 
                 lock (_dataSeries)
                 {
@@ -36,11 +34,7 @@ namespace Manipulator.Contexts.Simulator
                 }
 
                 _sumTime += _step;
-                
-                // Thread.Sleep(1);
             }
-
-            var t = 3;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// ReSharper disable CommentTypo
-namespace Manipulator.Model
+namespace Manipulator.Simulation.Model
 {
     public class SystemState
     {

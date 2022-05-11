@@ -50,7 +50,6 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Contexts\SharedKernel\ControlSignal.cs" />
         <Compile Include="Contexts\Simulator\Simulator.cs" />
         <Compile Include="DataSeries.cs" />
         <Compile Include="Form1.cs">
@@ -63,7 +62,6 @@
         <Compile Include="Regulator\PID\PidSpecification.cs" />
         <Compile Include="SimulationThread.cs" />
         <Compile Include="Model\IStateRepository.cs" />
-        <Compile Include="Model\SystemState.cs" />
         <Compile Include="Presenter\ChartPresenter.cs" />
         <Compile Include="Presenter\MainPresenter.cs" />
         <Compile Include="Program.cs" />
@@ -74,6 +72,7 @@
         <Compile Include="Simulation\Model\ControlElementSpecification.cs" />
         <Compile Include="Simulation\Model\Manipulator.cs" />
         <Compile Include="Simulation\Model\MotorSpecification.cs" />
+        <Compile Include="Simulation\Model\SystemState.cs" />
         <Compile Include="View\IMainView.cs" />
         <Compile Include="View\MainForm.cs">
           <SubType>Form</SubType>
@@ -106,9 +105,6 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="App.config" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Contexts\ControlSystem" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
