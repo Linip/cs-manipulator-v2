@@ -22,8 +22,11 @@ namespace Manipulator.Regulator.PID
             _errors.RemoveAt(2);
             _errors.Insert(0, error);
 
-            var discreteIntegral =  _s.Proportional * _s.Integrating * simulationStep;
-            var discreteDifferentiating =  _s.Proportional * _s.Differentiating / simulationStep;
+            var integrating = _s.Integrating / _s.Proportional;
+            var differentiating = _s.Differentiating / _s.Proportional;
+
+            var discreteIntegral =  _s.Proportional * integrating * simulationStep;
+            var discreteDifferentiating =  _s.Proportional * differentiating / simulationStep;
             
             _result = _result
                 + discreteIntegral * _errors[0]
