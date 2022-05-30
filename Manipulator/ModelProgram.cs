@@ -6,7 +6,7 @@ using Manipulator.View;
 
 namespace Manipulator
 {
-    internal static class Program
+    internal static class ModelProgram
     {
         private static readonly Mutex Mutex = new Mutex(false, "Manupulator Control App");
 
