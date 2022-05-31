@@ -17,6 +17,7 @@ namespace Manipulator.View
 
         private void MainForm_Load(Object sender, EventArgs e)
         {
+            _presenter.DemandObjectName();
             _presenter.ChartPresenter.InitChart(winChartViewer);
         }
 

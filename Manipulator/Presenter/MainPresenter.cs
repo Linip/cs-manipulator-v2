@@ -3,6 +3,8 @@ using System.Globalization;
 using System.Threading;
 using Manipulator.Contexts.Simulator;
 using Manipulator.Regulator.PID;
+using Manipulator.Shared.Infrastructure;
+using Manipulator.Shared.Models;
 using Manipulator.Simulation.Model;
 using Manipulator.View;
 
@@ -15,6 +17,16 @@ namespace Manipulator.Presenter
         private DataSeries _dataSeries;
         private Thread _simulationThread;
 
+        private readonly ManipulatorRepository _manipulatorRepository;
+        
+        private ControlObject _controlObject;
+
+        public void DemandObjectName()
+        {
+            var objectName = WelcomePresenter.DemandControlObjectName(_view);
+            _controlObject = _manipulatorRepository.FindOneByName(objectName);
+        }
+
         private readonly NumberFormatInfo _numberFormatInfo = new NumberFormatInfo
         {
             NumberDecimalSeparator = ","
@@ -25,6 +37,8 @@ namespace Manipulator.Presenter
             _view = view;
             view.Presenter = this;
             ChartPresenter = new ChartPresenter();
+
+            _manipulatorRepository = new ManipulatorRepository(new SqliteContext());
         }
 
         public void RunSimulation()

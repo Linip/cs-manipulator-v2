@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using Manipulator.Presenter.Exceptions;
 using Manipulator.Properties;
 using Manipulator.View;
 
 namespace Manipulator
 {
-    internal static class ModelProgram
+    internal static class Program
     {
         private static readonly Mutex Mutex = new Mutex(false, "Manupulator Control App");
 
@@ -21,6 +22,10 @@ namespace Manipulator
             try
             {
                 PerformPayload();
+            }
+            catch (WelcomeNotEnterObjectNameException)
+            {
+                Environment.Exit(0);
             }
             catch (Exception e)
             {

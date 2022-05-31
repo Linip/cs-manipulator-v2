@@ -27,5 +27,10 @@ namespace Manipulator.Simulation.Model
         /// Время измерения стейта
         /// </summary>
         public double Time;
+
+        /// <summary>
+        /// Идентификатор устройства
+        /// </summary>
+        public string DeviceId;
     }
 }

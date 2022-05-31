@@ -79,10 +79,12 @@
         <Compile Include="AdminTerminalProgram.cs" />
         <Compile Include="Contexts\Simulator\Simulator.cs" />
         <Compile Include="DataSeries.cs" />
+        <Compile Include="Presenter\Exceptions\WelcomeNotEnterObjectNameException.cs" />
+        <Compile Include="Presenter\WelcomePresenter.cs" />
         <Compile Include="Regulator\PID\PidSpecification.cs" />
         <Compile Include="Presenter\ChartPresenter.cs" />
         <Compile Include="Presenter\MainPresenter.cs" />
-        <Compile Include="ModelProgram.cs" />
+        <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Regulator\IRegulator.cs" />
         <Compile Include="Regulator\PID\PidRegulator.cs" />
@@ -98,6 +100,12 @@
         <Compile Include="View\MainForm.Designer.cs">
           <DependentUpon>MainForm.cs</DependentUpon>
         </Compile>
+        <Compile Include="View\WelcomeSimulationForm.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="View\WelcomeSimulationForm.Designer.cs">
+          <DependentUpon>WelcomeSimulationForm.cs</DependentUpon>
+        </Compile>
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -109,6 +117,9 @@
         </Compile>
         <EmbeddedResource Include="View\MainForm.resx">
           <DependentUpon>MainForm.cs</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Include="View\WelcomeSimulationForm.resx">
+          <DependentUpon>WelcomeSimulationForm.cs</DependentUpon>
         </EmbeddedResource>
         <None Include="packages.config" />
         <None Include="Properties\Settings.settings">
@@ -135,4 +146,5 @@
     </Target>
     <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
     <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+    <Import Project="..\Shared\Shared.projitems" Label="Shared" />
 </Project>
