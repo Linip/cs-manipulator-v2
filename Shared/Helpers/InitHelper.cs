@@ -2,9 +2,9 @@
 using Manipulator.Shared.Infrastructure;
 using Manipulator.Shared.Models;
 
-namespace Manipulator.Helpers
+namespace Manipulator.Shared.Helpers
 {
-    public static class InitHelper
+    public class InitHelper
     {
         public static void InitManipulator(ControlObject manipulator, SqliteContext entityManager)
         {

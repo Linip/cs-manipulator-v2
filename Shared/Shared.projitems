@@ -9,6 +9,7 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\InitHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\ManipulatorRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\SqliteContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ControlObject.cs" />
