@@ -19,6 +19,8 @@ namespace Manipulator.View
         {
             _presenter.DemandObjectName();
             _presenter.ChartPresenter.InitChart(winChartViewer);
+            
+            SetDefaultConfiguration();
         }
 
 
@@ -44,6 +46,11 @@ namespace Manipulator.View
 
         private void setDefaultConfig_Click(object sender, EventArgs e)
         {
+            SetDefaultConfiguration();
+        }
+
+        private void SetDefaultConfiguration()
+        {
             windingInductanceTextBox.Text = Convert.ToString(Math.Pow(10, -2));
             windingResistanceTextBox.Text = Convert.ToString(13.8);
             speedRatioTextBox.Text = Convert.ToString(20);
@@ -57,6 +64,9 @@ namespace Manipulator.View
             simulationStep.Text = "0,001";
             controlSignalTextBox.Text = "1";
 
+            regulatorPoporcialTeaxtBox.Text = "150";
+            regulatorIntegralTextBox.Text = "150";
+            regulatorDifferentialTextBox.Text = "150";
         }
     }
 }

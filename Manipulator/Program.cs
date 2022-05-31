@@ -17,7 +17,7 @@ namespace Manipulator
         [STAThread]
         static void Main()
         {
-            EnsureOnlyOneApplicationInstanceIsRunning();
+            // EnsureOnlyOneApplicationInstanceIsRunning();
             
             try
             {

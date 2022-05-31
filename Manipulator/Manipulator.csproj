@@ -79,6 +79,7 @@
         <Compile Include="AdminTerminalProgram.cs" />
         <Compile Include="Contexts\Simulator\Simulator.cs" />
         <Compile Include="DataSeries.cs" />
+        <Compile Include="Helpers\InitHelper.cs" />
         <Compile Include="Presenter\Exceptions\WelcomeNotEnterObjectNameException.cs" />
         <Compile Include="Presenter\WelcomePresenter.cs" />
         <Compile Include="Regulator\PID\PidSpecification.cs" />

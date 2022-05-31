@@ -14,7 +14,7 @@ namespace Manipulator.Shared.Models
         [Required]
         public double Time { get; set; }
         
-        public int DeviceId { get; set; }
+        public int SensorId { get; set; }
         public Sensor Sensor { get; set; }
     }
 }

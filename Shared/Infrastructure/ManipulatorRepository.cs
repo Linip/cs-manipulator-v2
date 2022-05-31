@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
+using Manipulator.Helpers;
 using Manipulator.Shared.Models;
 
 namespace Manipulator.Shared.Infrastructure
@@ -20,11 +19,23 @@ namespace Manipulator.Shared.Infrastructure
             IQueryable<ControlObject> manipulatorQuery =
                 from controlObject in EntityManager.Manipulators
                 where controlObject.Name == name
+                
                 select controlObject;
 
-            var manipulator = manipulatorQuery.FirstOrDefault();
+            var mm = EntityManager.Manipulators
+                .Where(m => m.Name == name)
+                .Include(m => m.Sensors)
+                .First();
 
-            return manipulator ?? new ControlObject() {Name = name};
+            var manipulator = manipulatorQuery.FirstOrDefault();
+            
+            if (manipulator == null)
+            {
+                manipulator = new ControlObject() {Name = name};
+                InitHelper.InitManipulator(manipulator, EntityManager);
+            }
+
+            return manipulator;
         }
     }
 }

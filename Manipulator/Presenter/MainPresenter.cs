@@ -77,7 +77,8 @@ namespace Manipulator.Presenter
             
             var manipulator = new Simulation.Model.Manipulator(motorSpecification, controlElementSpecification, regulator);
             
-            var simulator =  new Simulator(manipulator, simulationTime, controlSignal, simulationStep, _dataSeries);
+            var simulator =  new Simulator(manipulator, simulationTime, controlSignal, simulationStep, _dataSeries, _controlObject.Name);
+            simulator.ManipulatorRepository = _manipulatorRepository;
 
             _simulationThread = new Thread(simulator.Run);
             _simulationThread.Start();

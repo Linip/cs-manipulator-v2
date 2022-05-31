@@ -14,5 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\ControlObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Measure.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Sensor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SensorType.cs" />
   </ItemGroup>
 </Project>
