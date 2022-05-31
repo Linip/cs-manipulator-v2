@@ -5,10 +5,10 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{18635F5A-02F1-4EC5-9228-2E3CBB638DB4}</ProjectGuid>
+        <ProjectGuid>{4DC2C732-9B17-457D-B2F5-D7B43E558D1A}</ProjectGuid>
         <OutputType>WinExe</OutputType>
-        <RootNamespace>Manipulator</RootNamespace>
-        <AssemblyName>Manipulator</AssemblyName>
+        <RootNamespace>AdminPanel</RootNamespace>
+        <AssemblyName>AdminPanel</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,10 +42,6 @@
           <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
           <Private>True</Private>
         </Reference>
-        <Reference Include="netchartdir, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2db5fc05de12e204">
-          <HintPath>..\packages\ChartDirector.Net.7.0.0\lib\net40\netchartdir.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
         <Reference Include="SQLite.CodeFirst, Version=1.7.0.34, Culture=neutral, PublicKeyToken=eb96ba0a78d831a7">
           <HintPath>..\packages\SQLite.CodeFirst.1.7.0.34\lib\net45\SQLite.CodeFirst.dll</HintPath>
           <Private>True</Private>
@@ -76,36 +72,17 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="AdminTerminalProgram.cs" />
-        <Compile Include="Contexts\Simulator\Simulator.cs" />
-        <Compile Include="DataSeries.cs" />
-        <Compile Include="Presenter\Exceptions\WelcomeNotEnterObjectNameException.cs" />
-        <Compile Include="Presenter\WelcomePresenter.cs" />
-        <Compile Include="Regulator\PID\PidSpecification.cs" />
-        <Compile Include="Presenter\ChartPresenter.cs" />
-        <Compile Include="Presenter\MainPresenter.cs" />
+        <Compile Include="MainForm.cs">
+            <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="MainForm.Designer.cs">
+            <DependentUpon>MainForm.cs</DependentUpon>
+        </Compile>
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Regulator\IRegulator.cs" />
-        <Compile Include="Regulator\PID\PidRegulator.cs" />
-        <Compile Include="Simulation\ISimulationModel.cs" />
-        <Compile Include="Simulation\Model\ControlElementSpecification.cs" />
-        <Compile Include="Simulation\Model\Manipulator.cs" />
-        <Compile Include="Simulation\Model\MotorSpecification.cs" />
-        <Compile Include="Simulation\Model\SystemState.cs" />
-        <Compile Include="View\IMainView.cs" />
-        <Compile Include="View\MainForm.cs">
-          <SubType>Form</SubType>
-        </Compile>
-        <Compile Include="View\MainForm.Designer.cs">
+        <EmbeddedResource Include="MainForm.resx">
           <DependentUpon>MainForm.cs</DependentUpon>
-        </Compile>
-        <Compile Include="View\WelcomeSimulationForm.cs">
-          <SubType>Form</SubType>
-        </Compile>
-        <Compile Include="View\WelcomeSimulationForm.Designer.cs">
-          <DependentUpon>WelcomeSimulationForm.cs</DependentUpon>
-        </Compile>
+        </EmbeddedResource>
         <EmbeddedResource Include="Properties\Resources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
             <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -115,12 +92,6 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
-        <EmbeddedResource Include="View\MainForm.resx">
-          <DependentUpon>MainForm.cs</DependentUpon>
-        </EmbeddedResource>
-        <EmbeddedResource Include="View\WelcomeSimulationForm.resx">
-          <DependentUpon>WelcomeSimulationForm.cs</DependentUpon>
-        </EmbeddedResource>
         <None Include="packages.config" />
         <None Include="Properties\Settings.settings">
             <Generator>SettingsSingleFileGenerator</Generator>
@@ -136,6 +107,7 @@
         <None Include="App.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <Import Project="..\Shared\Shared.projitems" Label="Shared" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
       <PropertyGroup>
         <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
@@ -146,5 +118,4 @@
     </Target>
     <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
     <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
-    <Import Project="..\Shared\Shared.projitems" Label="Shared" />
 </Project>
