@@ -42,6 +42,10 @@
           <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
           <Private>True</Private>
         </Reference>
+        <Reference Include="netchartdir, Version=7.0.0.0, Culture=neutral, PublicKeyToken=2db5fc05de12e204">
+          <HintPath>..\packages\ChartDirector.Net.7.0.0\lib\net40\netchartdir.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="SQLite.CodeFirst, Version=1.7.0.34, Culture=neutral, PublicKeyToken=eb96ba0a78d831a7">
           <HintPath>..\packages\SQLite.CodeFirst.1.7.0.34\lib\net45\SQLite.CodeFirst.dll</HintPath>
           <Private>True</Private>
