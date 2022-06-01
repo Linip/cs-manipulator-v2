@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\ManipulatorRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Infrastructure\SqliteContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ControlObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DispatcherViewRecord.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Measure.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Sensor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SensorType.cs" />
