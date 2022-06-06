@@ -6,7 +6,7 @@ namespace Manipulator
     {
         private readonly List<double> _data;
 
-        public DataSeries(int sampleSize) // todo delete argument
+        public DataSeries(int sampleSize) 
         {
             _data = new List<double>();
         }

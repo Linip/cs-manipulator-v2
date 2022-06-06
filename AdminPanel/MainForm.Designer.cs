@@ -35,6 +35,7 @@ namespace AdminPanel
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.winChartViewer1 = new ChartDirector.WinChartViewer();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize) (this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.winChartViewer1)).BeginInit();
@@ -44,6 +45,7 @@ namespace AdminPanel
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 49);
             this.dataGridView1.Name = "dataGridView1";
@@ -59,11 +61,20 @@ namespace AdminPanel
             this.winChartViewer1.TabIndex = 4;
             this.winChartViewer1.TabStop = false;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker1.Location = new System.Drawing.Point(23, 13);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(220, 20);
+            this.dateTimePicker1.TabIndex = 5;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1255, 641);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.winChartViewer1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "MainForm";
@@ -73,6 +84,8 @@ namespace AdminPanel
             ((System.ComponentModel.ISupportInitialize) (this.winChartViewer1)).EndInit();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
 
         private ChartDirector.WinChartViewer winChartViewer1;
 

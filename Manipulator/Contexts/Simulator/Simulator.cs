@@ -1,4 +1,5 @@
-﻿using Manipulator.Shared.Infrastructure;
+﻿using System.Threading;
+using Manipulator.Shared.Infrastructure;
 using Manipulator.Shared.Models;
 using Manipulator.Simulation;
 
@@ -54,7 +55,10 @@ namespace Manipulator.Contexts.Simulator
                 }
 
                 _sumTime += _step;
+                
+                Thread.Sleep(1);
             }
+            
         }
     }
 }

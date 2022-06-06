@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using Manipulator.Shared.Helpers;
 using Manipulator.Shared.Models;
 

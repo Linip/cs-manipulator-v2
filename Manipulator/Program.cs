@@ -17,8 +17,6 @@ namespace Manipulator
         [STAThread]
         static void Main()
         {
-            // EnsureOnlyOneApplicationInstanceIsRunning();
-            
             try
             {
                 PerformPayload();
@@ -31,10 +29,6 @@ namespace Manipulator
             {
                 Console.WriteLine(e);
                 throw;
-            }
-            finally
-            {
-                Mutex.ReleaseMutex();
             }
         }
 

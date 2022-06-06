@@ -19,5 +19,6 @@ namespace Manipulator.Shared.Infrastructure
                 .ToTable("Records")
                 .HasKey(v => v.MeasureId);
         }
+        
     }
 }
